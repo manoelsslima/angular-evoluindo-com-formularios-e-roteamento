@@ -35,6 +35,14 @@ header .cabecalho-contato {
   margin-top: 32px;
 }
 
+header .cabecalho-link button {
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+
 h1 {
   font-family: 'Montserrat';
   font-size: 26px;
