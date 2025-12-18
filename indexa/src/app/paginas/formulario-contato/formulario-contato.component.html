@@ -27,9 +27,14 @@
         
         <label for="email">E-mail</label>
         <input type="email" formControlName="email" id="email" name="email" placeholder="Digite o e-mail do contato">
-        @if(contatoForm.get('email')?.errors && contatoForm.get('email')?.touched) {
+        @if(contatoForm.get('email')?.errors?.['required'] && contatoForm.get('email')?.touched) {
             <div class="mensagem-erro">
                 Campo obrigatório
+            </div>
+        }
+        @if(contatoForm.get('email')?.errors?.['email'] && contatoForm.get('email')?.touched) {
+            <div class="mensagem-erro">
+                E-mail inválido
             </div>
         }
         
