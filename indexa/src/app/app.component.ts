@@ -8,6 +8,7 @@ import { ContatoComponent } from './componentes/contato/contato.component';
 import { FormsModule } from '@angular/forms';
 
 import agenda from './agenda.json';
+import { FormularioContatoComponent } from './paginas/formulario-contato/formulario-contato.component';
 
 interface Contato {
   id: number;
@@ -19,6 +20,7 @@ interface Contato {
   selector: 'app-root',
   standalone: true,
   imports: [
+    FormularioContatoComponent,
     CommonModule,
     RouterOutlet,
     ContainerComponent,
