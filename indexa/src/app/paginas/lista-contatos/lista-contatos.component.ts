@@ -1,19 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CabecalhoComponent } from '../../componentes/cabecalho/cabecalho.component';
 import { ContainerComponent } from '../../componentes/container/container.component';
 import { ContatoComponent } from '../../componentes/contato/contato.component';
 import { SeparadorComponent } from '../../componentes/separador/separador.component';
 import { FormularioContatoComponent } from '../formulario-contato/formulario-contato.component';
-import agenda from '../../agenda.json';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-interface Contato {
-  id: number;
-  nome: string;
-  telefone: string;
-}
+import { ContatoService } from '../../services/contato.service';
+import { Contato } from '../../componentes/contato/contato';
 
 @Component({
   selector: 'app-lista-contatos',
@@ -32,17 +27,23 @@ interface Contato {
   templateUrl: './lista-contatos.component.html',
   styleUrl: './lista-contatos.component.css'
 })
-export class ListaContatosComponent {
+export class ListaContatosComponent implements OnInit {
   alfabeto: string = 'abcdefghijklmnopqrstuvwxyz';
-  contatos: Contato[] = agenda;
+  contatos: Contato[] = [];
+  // two way data binding
+  filtroPorTexto: string = '';
+
+  // private: faz com que a variável seja declarada como propriedade da classe
+  constructor(private contatoService: ContatoService) { }
+
+  ngOnInit() {
+    this.contatos = this.contatoService.obterContatos();
+  }
 
   // remove os acentos de uma string
   removerAcentos(texto: string): string {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
-
-  // two way data binding
-  filtroPorTexto: string = '';
 
   filtrarContatosPorTexto(): Contato[] {
     if (!this.filtroPorTexto) {
